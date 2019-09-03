@@ -26,4 +26,34 @@ describe "Hotel_System class" do
       expect(@hotel_system.list_of_rooms.length).must_equal 20
     end
   end
+
+  describe "reservations_by_date method" do
+    before do
+      @room_one = Hotel::Room.new(id: 10)
+      @date_range_one = Hotel::DateRange.new(start_date: "2019-05-08", end_date: "2019-05-18")
+      @reservation_one = Hotel::Reservation.new(
+        id: 2,
+        date_range: @date_range_one,
+        room: @room_one,
+        room_id: @room_one.id,
+        price: 200,
+      )
+
+      @room_two = Hotel::Room.new(id: 5)
+      @date_range_two = Hotel::DateRange.new(start_date: "2019-05-08", end_date: "2019-05-10")
+      @reservation_two = Hotel::Reservation.new(
+        id: 3,
+        date_range: @date_range_two,
+        room: @room_two,
+        room_id: @room_two.id,
+        price: 200,
+      )
+
+      @room_one.add_reservation(@reservation_one)
+      @room_two.add_reservation(@reservation_two)
+    end
+
+    it "returns a list of reservations on a specific date" do
+    end
+  end
 end

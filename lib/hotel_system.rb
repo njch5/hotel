@@ -1,3 +1,6 @@
+require_relative "room"
+require_relative "reservation"
+
 module Hotel
   class HotelSystem
     attr_reader :rooms, :reservations
@@ -10,5 +13,7 @@ module Hotel
     def list_of_rooms
       return @rooms
     end
+
+    # def reservations_by_date
   end
 end

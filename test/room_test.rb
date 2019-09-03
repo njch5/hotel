@@ -38,4 +38,10 @@ describe "Room class" do
       expect(@room.reservations.include?(@reservation))
     end
   end
+
+  # describe "is_available? method" do
+  #   it "will return whether the room is available given a date range" do
+
+  #   end
+  # end
 end
