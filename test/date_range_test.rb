@@ -33,4 +33,13 @@ describe "DateRange Class" do
       expect(@date_range.duration).must_equal 15
     end
   end
+
+  describe "Overlap? method" do
+    it "will returns true if two date ranges overlap" do
+      @date_range_one = Hotel::DateRange.new(start_date: "2019-07-15", end_date: "2019-07-30")
+      @date_range_two = Hotel::DateRange.new(start_date: "2019-07-05", end_date: "2019-07-16")
+
+      expect(@date_range_one.overlap?(@date_range_two)).must_equal true
+    end
+  end
 end
