@@ -54,6 +54,7 @@ describe "Hotel_System class" do
     end
 
     it "returns a list of reservations on a specific date" do
+      expect(@room_one.reservations_by_date).must_include @reservation_one
     end
   end
 end
