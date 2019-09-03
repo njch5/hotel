@@ -17,5 +17,15 @@ describe "Reservation class" do
     it "Creates an instance of Reservation" do
       expect(@reservation).must_be_instance_of Hotel::Reservation
     end
+
+    it "is set up with specific attributes and data types" do
+      expect(@reservation.id).must_be_instance_of Integer
+      expect(@reservation.id).must_equal 1
+      expect(@reservation.date_range).must_be_instance_of Hotel::DateRange
+      expect(@reservation.room).must_be_instance_of Hotel::Room
+      expect(@reservation.room_id).must_be_instance_of Integer
+      expect(@reservation.room_id).must_equal 1
+      expect(@reservation.price).must_equal 200
+    end
   end
 end
