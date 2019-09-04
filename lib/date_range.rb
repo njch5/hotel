@@ -21,10 +21,16 @@ module Hotel
 
     def overlap?(date_range)
       # date_range = date_range.dates
-      dates.each do |date|
-        return true if date_range.include?(date)
+      # date_range.each do |date|
+      # dates.each do |date|
+      #   return true if date_range.include?(date)
+      # end
+
+      if @end_date <= date_range.start_date || @start_date >= date_range.end_date
+        return false
+      else
+        return true
       end
-      return false
     end
   end
 end

@@ -87,5 +87,8 @@ describe "Room class" do
       @dates_three = Hotel::DateRange.new(start_date: "2019-03-10", end_date: "2019-03-15")
       expect(@room.is_available?(@dates_three)).must_equal false
     end
+
+    it "will return true when a room is available after a previous reservation has ended" do
+    end
   end
 end
