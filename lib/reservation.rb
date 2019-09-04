@@ -18,7 +18,11 @@ module Hotel
     end
 
     def overlap?(other_date_range)
-      return date_range.overlap?(other_date_range)
+      return true if date_range.overlap?(other_date_range)
     end
+
+    # def same_dates(other_date_range)
+    #   return (date_range.start_date == other_date_range.start_date) && (date_range.end_date == other_date_range.end_date)
+    # end
   end
 end

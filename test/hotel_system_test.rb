@@ -54,6 +54,8 @@ describe "Hotel_System class" do
     end
 
     # it "returns a list of reservations on a specific date" do
+    #   hotel_system = Hotel::HotelSystem.new
+    #   date_range = Hotel::DateRange(start_date: "2019-04-04", end_date: "2019-04-08")
     #   expect(@room_one.reservations_by_date).must_include @reservation_one
     # end
   end

@@ -1,4 +1,5 @@
 require_relative "test_helper"
+require "pry"
 
 describe "Room class" do
   describe "initialize" do
@@ -51,7 +52,6 @@ describe "Room class" do
         date_range: @date_range_one,
         room: @room,
         room_id: @room.id,
-        price: 200,
       )
 
       @reservation_two = Hotel::Reservation.new(
@@ -59,7 +59,6 @@ describe "Room class" do
         date_range: @date_range_two,
         room: @room,
         room_id: @room.id,
-        price: 200,
       )
 
       @reservation_three = Hotel::Reservation.new(
@@ -67,7 +66,6 @@ describe "Room class" do
         date_range: @date_range_three,
         room: @room,
         room_id: @room.id,
-        price: 200,
       )
       @room.add_reservation(@reservation_one)
       @room.add_reservation(@reservation_two)
@@ -79,8 +77,8 @@ describe "Room class" do
     # end
 
     it "will return true if a room is available given a date range" do
-      @dates_one = Hotel::DateRange.new(start_date: "2019-05-25", end_date: "2019-05-30")
-      @dates_two = Hotel::DateRange.new(start_date: "2019-06-03", end_date: "2019-06-10")
+      @dates_one = Hotel::DateRange.new(start_date: "2019-03-25", end_date: "2019-03-30")
+      @dates_two = Hotel::DateRange.new(start_date: "2019-02-03", end_date: "2019-02-10")
       expect(@room.is_available?(@dates_one)).must_equal true
       expect(@room.is_available?(@dates_two)).must_equal true
     end

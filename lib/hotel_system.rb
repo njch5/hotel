@@ -15,9 +15,10 @@ module Hotel
       return @rooms
     end
 
-    # def reservations_by_date(specific_date)
-    #   @reservations.dates.include?(specific_date)
-    #   return @reservations
+    # def reservations_by_date(specific_date_range)
+    #   return @reservations.dates.select do |res|
+    #            res.same_dates?(specific_date_range)
+    #          end
     # end
   end
 end
