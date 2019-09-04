@@ -39,9 +39,33 @@ describe "Room class" do
     end
   end
 
-  # describe "is_available? method" do
-  #   it "will return whether the room is available given a date range" do
+  describe "is_available? method" do
+    before do
+      @rooms = (1..20).to_a
+      @room = Hotel::Room.new(id: 10)
+      @date_range = Hotel::DateRange.new(start_date: "2019-03-08", end_date: "2019-03-15")
+      @reservation = Hotel::Reservation.new(
+        id: 1,
+        date_range: @date_range,
+        room: @room,
+        room_id: @room.id,
+        price: 200,
+      )
+      @room.add_reservation(@reservation)
 
-  #   end
-  # end
+      @room_two = Hotel::Room.new(id: 9)
+    end
+
+    it "returns the id of the available room" do
+      expect(@room_two.id).must_equal 9
+    end
+
+    it "will return true if a room is available given a date range" do
+      expect(@room_two.is_available?).must_equal true
+    end
+
+    it "will return false if a room is unavailable given a date range" do
+      expect(@room.is_available?).must_equal false
+    end
+  end
 end
