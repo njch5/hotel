@@ -1,4 +1,5 @@
-require_relative "hotel_system"
+# require_relative "reservation"
+require_relative "date_range"
 
 module Hotel
   class Room
@@ -13,9 +14,12 @@ module Hotel
       @reservations << reservation
     end
 
-    def is_available?
-      rooms = (1..20).to_a
-      return true if rooms.find { |room| room == id } && !(@reservations.room_id.include?(id))
+    def is_available?(date_range)
+      @reservations.each do |res|
+        if res.overlap?(date_range)
+          return false
+        end
+      end
     end
   end
 end

@@ -41,31 +41,53 @@ describe "Room class" do
 
   describe "is_available? method" do
     before do
-      @rooms = (1..20).to_a
       @room = Hotel::Room.new(id: 10)
-      @date_range = Hotel::DateRange.new(start_date: "2019-03-08", end_date: "2019-03-15")
-      @reservation = Hotel::Reservation.new(
-        id: 1,
-        date_range: @date_range,
+      @date_range_one = Hotel::DateRange.new(start_date: "2019-04-08", end_date: "2019-04-15")
+      @date_range_two = Hotel::DateRange.new(start_date: "2019-05-12", end_date: "2019-05-16")
+      @date_range_three = Hotel::DateRange.new(start_date: "2019-03-09", end_date: "2019-03-16")
+
+      @reservation_one = Hotel::Reservation.new(
+        id: 5,
+        date_range: @date_range_one,
         room: @room,
         room_id: @room.id,
         price: 200,
       )
-      @room.add_reservation(@reservation)
 
-      @room_two = Hotel::Room.new(id: 9)
+      @reservation_two = Hotel::Reservation.new(
+        id: 8,
+        date_range: @date_range_two,
+        room: @room,
+        room_id: @room.id,
+        price: 200,
+      )
+
+      @reservation_three = Hotel::Reservation.new(
+        id: 3,
+        date_range: @date_range_three,
+        room: @room,
+        room_id: @room.id,
+        price: 200,
+      )
+      @room.add_reservation(@reservation_one)
+      @room.add_reservation(@reservation_two)
+      @room.add_reservation(@reservation_three)
     end
 
-    it "returns the id of the available room" do
-      expect(@room_two.id).must_equal 9
-    end
+    # it "returns the id of the available room" do
+    #   expect(@room_two.id).must_equal 9
+    # end
 
     it "will return true if a room is available given a date range" do
-      expect(@room_two.is_available?).must_equal true
+      @dates_one = Hotel::DateRange.new(start_date: "2019-05-25", end_date: "2019-05-30")
+      @dates_two = Hotel::DateRange.new(start_date: "2019-06-03", end_date: "2019-06-10")
+      expect(@room.is_available?(@dates_one)).must_equal true
+      expect(@room.is_available?(@dates_two)).must_equal true
     end
 
     it "will return false if a room is unavailable given a date range" do
-      expect(@room.is_available?).must_equal false
+      @dates_three = Hotel::DateRange.new(start_date: "2019-03-10", end_date: "2019-03-15")
+      expect(@room.is_available?(@dates_three)).must_equal false
     end
   end
 end

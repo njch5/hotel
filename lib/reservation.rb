@@ -16,5 +16,9 @@ module Hotel
     def total_cost
       price * date_range.duration
     end
+
+    def overlap?(other_date_range)
+      return date_range.overlap?(other_date_range)
+    end
   end
 end
