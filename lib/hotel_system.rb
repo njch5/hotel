@@ -15,9 +15,9 @@ module Hotel
       return @rooms
     end
 
-    def reservations_by_date(specific_date)
-      @reservations.dates.include?(specific_date)
-      return @reservations
-    end
+    # def reservations_by_date(specific_date)
+    #   @reservations.dates.include?(specific_date)
+    #   return @reservations
+    # end
   end
 end
