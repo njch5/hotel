@@ -20,10 +20,11 @@ module Hotel
     end
 
     def overlap?(date_range)
-      date_range = date_range.dates
-      date_range.each do |date|
+      # date_range = date_range.dates
+      dates.each do |date|
         return true if date_range.include?(date)
       end
+      return false
     end
   end
 end

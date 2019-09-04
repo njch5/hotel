@@ -1,4 +1,4 @@
-# require_relative "reservation"
+
 require_relative "date_range"
 
 module Hotel
@@ -15,11 +15,11 @@ module Hotel
     end
 
     def is_available?(date_range)
-      @reservations.each do |res|
-        if res.overlap?(date_range)
-          return false
-        end
+      reservations.each do |res|
+        return false if res.overlap?(date_range)
       end
+      # Return true here?
+      return true
     end
   end
 end
