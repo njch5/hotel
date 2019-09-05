@@ -25,38 +25,59 @@ describe "Hotel_System class" do
       expect(@hotel_system.list_of_rooms).must_be_kind_of Array
       expect(@hotel_system.list_of_rooms.length).must_equal 20
     end
+
+    describe "Reserve Room Method" do
+      before do
+        @hotel_system = Hotel::HotelSystem.new
+        @start_date = "2019-07-08"
+        @end_date = "2019-07-15"
+        @date_range = Hotel::DateRange.new(start_date: @start_date, end_date: @end_date)
+        @rooms = @hotel_system.list_of_rooms
+        @assigned_room = @hotel_system.available_room(@date_range)
+      end
+      # it "will reserve a room" do
+      #   expect(@hotel_system.reserve_room(start_date: @start_date, end_date: @end_date)).must_equal true
+      # end
+    end
+
+    describe "Open Rooms Method" do
+      before do
+        @hotel_system = Hotel::HotelSystem.new
+        @date_range = Hotel::DateRange.new(start_date: "2019-03-10", end_date: "2019-03-20")
+      end
+
+      # it "will pick an open room" do
+      #   expect(@hotel_system.open_rooms(@date_range)).must_equal 1
+      # end
+    end
   end
 
   describe "reservations_by_date method" do
     before do
-      @room_one = Hotel::Room.new(id: 10)
+      @hotel_system = Hotel::HotelSystem.new
       @date_range_one = Hotel::DateRange.new(start_date: "2019-05-08", end_date: "2019-05-18")
       @reservation_one = Hotel::Reservation.new(
         id: 2,
         date_range: @date_range_one,
-        room: @room_one,
-        room_id: @room_one.id,
+        room: @hotel_system.rooms.first,
         price: 200,
       )
 
-      @room_two = Hotel::Room.new(id: 5)
       @date_range_two = Hotel::DateRange.new(start_date: "2019-05-08", end_date: "2019-05-10")
       @reservation_two = Hotel::Reservation.new(
         id: 3,
         date_range: @date_range_two,
-        room: @room_two,
-        room_id: @room_two.id,
+        room: @hotel_system.rooms.last,
         price: 200,
       )
 
-      @room_one.add_reservation(@reservation_one)
-      @room_two.add_reservation(@reservation_two)
+      @hotel_system.add_reservation(@reservation_one)
+      @hotel_system.add_reservation(@reservation_two)
     end
 
-    # it "returns a list of reservations on a specific date" do
-    #   hotel_system = Hotel::HotelSystem.new
-    #   date_range = Hotel::DateRange(start_date: "2019-04-04", end_date: "2019-04-08")
-    #   expect(@room_one.reservations_by_date).must_include @reservation_one
-    # end
+    it "returns a list of reservations on a specific date" do
+      date_range = Hotel::DateRange.new(start_date: "2019-04-04", end_date: "2019-04-08")
+      expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_include @reservation_one
+    end
   end
 end
