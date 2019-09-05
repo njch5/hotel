@@ -29,7 +29,6 @@ describe "Room class" do
         id: 1,
         date_range: @date_range,
         room: @room,
-        room_id: @room.id,
         price: 200,
       )
     end
@@ -51,21 +50,18 @@ describe "Room class" do
         id: 5,
         date_range: @date_range_one,
         room: @room,
-        room_id: @room.id,
       )
 
       @reservation_two = Hotel::Reservation.new(
         id: 8,
         date_range: @date_range_two,
         room: @room,
-        room_id: @room.id,
       )
 
       @reservation_three = Hotel::Reservation.new(
         id: 3,
         date_range: @date_range_three,
         room: @room,
-        room_id: @room.id,
       )
       @room.add_reservation(@reservation_one)
       @room.add_reservation(@reservation_two)

@@ -18,7 +18,6 @@ module Hotel
       reservations.each do |res|
         return false if res.overlap?(date_range)
       end
-      # Return true here?
       return true
     end
   end
