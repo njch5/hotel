@@ -1,6 +1,7 @@
 require_relative "room"
 require_relative "reservation"
 require_relative "date_range"
+require "pry"
 
 module Hotel
   class HotelSystem
@@ -31,8 +32,8 @@ module Hotel
     end
 
     def reservations_by_date(specific_date)
-      return @reservations.dates.select do |res|
-               res.include_date?(specific_date)
+      return @reservations.select do |reservation|
+               reservation.include_date?(specific_date)
              end
     end
 

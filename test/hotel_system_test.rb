@@ -77,7 +77,12 @@ describe "Hotel_System class" do
 
     it "returns a list of reservations on a specific date" do
       date_range = Hotel::DateRange.new(start_date: "2019-04-04", end_date: "2019-04-08")
-      expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_include @reservation_one
+      expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_equal @reservation_one
+    end
+
+    it "returns an empty array if there are no reservations on a specific date" do
+      date_range = Hotel::DateRange.new(start_date: "2019-04-04", end_date: "2019-04-08")
+      expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_equal []
     end
   end
 end
