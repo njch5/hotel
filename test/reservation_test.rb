@@ -9,7 +9,6 @@ describe "Reservation class" do
         id: 1,
         date_range: @date_range,
         room: @room,
-        room_id: @room.id,
         price: 200,
       )
     end
@@ -23,8 +22,6 @@ describe "Reservation class" do
       expect(@reservation.id).must_equal 1
       expect(@reservation.date_range).must_be_instance_of Hotel::DateRange
       expect(@reservation.room).must_be_instance_of Hotel::Room
-      expect(@reservation.room_id).must_be_instance_of Integer
-      expect(@reservation.room_id).must_equal 1
       expect(@reservation.price).must_equal 200
     end
 
@@ -39,7 +36,7 @@ describe "Reservation class" do
     before do
       @room = Hotel::Room.new(id: 8)
       @date_range = Hotel::DateRange.new(start_date: "2019-09-08", end_date: "2019-09-15")
-      @reservation = Hotel::Reservation.new(id: 3, date_range: @date_range, room: @room, room_id: @room.id, price: 200)
+      @reservation = Hotel::Reservation.new(id: 3, date_range: @date_range, room: @room, price: 200)
     end
 
     it "is an instance of Reservation" do
