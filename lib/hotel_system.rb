@@ -7,8 +7,12 @@ module Hotel
     attr_reader :rooms, :reservations
 
     def initialize
-      @rooms = (1..20).to_a
+      @rooms = []
       @reservations = []
+
+      (1..20).each do |num|
+        @rooms << Hotel::Room.new(id: num)
+      end
     end
 
     def list_of_rooms
@@ -18,29 +22,32 @@ module Hotel
     def reserve_room(start_date:, end_date:, price: 200)
       id = create_id(@reservations)
       date_range = date_range_wrap(start_date, end_date)
+      # date_range = Hotel::DateRange.new(start_date: start_date, end_date: end_date)
       room = available_room(date_range)
       reservation = reservation_wrap(id, room, date_range, price)
+      # reservation = Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
       add_reservation(reservation)
       return reservation
     end
 
-    # def reservations_by_date(specific_date_range)
-    #   return @reservations.dates.select do |res|
-    #            res.same_dates?(specific_date_range)
-    #          end
-    # end
+    def reservations_by_date(specific_date)
+      return @reservations.dates.select do |res|
+               res.include_date?(specific_date)
+             end
+    end
+
     def add_reservation(reservation)
       @reservations << reservation
     end
 
-    def open_rooms
+    def open_rooms(date_range)
       return @rooms.select do |room|
-               room.is_available?(date_range) == false
+               room.is_available?(date_range)
              end
     end
 
-    def available_room
-      room = open_rooms.find { |room| room }
+    def available_room(date_range)
+      room = open_rooms(date_range).find { |room| room }
       raise ArgumentError, "No available rooms!" unless room
       return room
     end
