@@ -1,6 +1,5 @@
 require_relative "date_range"
 require_relative "room"
-require_relative "reservation"
 
 module Hotel
   class Block
@@ -26,7 +25,7 @@ module Hotel
     end
 
     def find_available_room
-      room = @rooms.find { |room| room.is_available?(date_range) }
+      room = @rooms.find { |a_room| a_room.is_available?(date_range) }
       raise ArgumentError, "No available rooms! All are booked" unless room
     end
   end

@@ -1,6 +1,7 @@
 require_relative "room"
 require_relative "reservation"
 require_relative "date_range"
+require_relative "block"
 require "pry"
 
 module Hotel
@@ -10,6 +11,7 @@ module Hotel
     def initialize
       @rooms = []
       @reservations = []
+      @blocks = []
 
       (1..20).each do |num|
         @rooms << Hotel::Room.new(id: num)
@@ -44,7 +46,7 @@ module Hotel
     end
 
     def available_room(date_range)
-      room = open_rooms(date_range).find { |room| room }
+      room = open_rooms(date_range).find { |a_room| a_room }
       raise StandardError, "No available rooms!" unless room
       return room
     end
@@ -53,19 +55,24 @@ module Hotel
       @reservations << reservation
     end
 
+    def create_a_block(date_range:, rooms:, discounted_price:)
+      id = create_id(@blocks)
+      block = Hotel::Block.new(id: id, rooms: rooms, date_range: date_range, discounted_price: discounted_price)
+      return @blocks << block
+    end
+
+    def reserve_a_block(block)
+      id = create_id(reservations)
+      date_range = block.date_range
+      room = room.find_available_room
+      price = block.discounted_price
+      return Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price, block: block)
+    end
+
     private
 
     def create_id(object)
       return object.count + 1
     end
-
-    # The constructors don't have to be private methods!
-    # def date_range_constructor(start_date, end_date)
-    #   Hotel::DateRange.new(start_date: start_date, end_date: end_date)
-    # end
-
-    # def reservation_constructor(id, room, date_range, price)
-    #   Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
-    # end
   end
 end
