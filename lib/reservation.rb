@@ -12,7 +12,7 @@ module Hotel
       @price = price
     end
 
-    def total_cost
+    def total_cost_per_night
       price * date_range.duration
     end
 

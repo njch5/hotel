@@ -32,7 +32,7 @@ describe "Reservation class" do
     end
   end
 
-  describe "Total cost method" do
+  describe "Total cost per night method" do
     before do
       @room = Hotel::Room.new(id: 8)
       @date_range = Hotel::DateRange.new(start_date: "2019-09-08", end_date: "2019-09-15")
@@ -44,7 +44,7 @@ describe "Reservation class" do
     end
 
     it "returns the total cost of a reservation" do
-      expect(@reservation.total_cost).must_equal 1400
+      expect(@reservation.total_cost_per_night).must_equal 1400
     end
   end
 end
