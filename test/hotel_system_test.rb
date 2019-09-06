@@ -106,4 +106,22 @@ describe "Hotel_System class" do
       expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_equal []
     end
   end
+
+  describe "Create a block method" do
+    before do
+      @hotel_system = Hotel::HotelSystem.new
+      @start_date = "2019-11-03"
+      @end_date = "2019-11-10"
+      @date_range = Hotel::DateRange.new(start_date: @start_date, end_date: @end_date)
+      @rooms = @hotel_system.rooms[0..3]
+      @discounted_price = 160
+      @block = @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
+    end
+    it "holds the attributes and its data types" do
+      expect(@block).must_be_instance_of Array
+      expect(@block[0].date_range).must_be_instance_of Hotel::DateRange
+      expect(@block[0].rooms).must_be_instance_of Array
+      expect(@block[0].discounted_price).must_be_instance_of Integer
+    end
+  end
 end
