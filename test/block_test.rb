@@ -24,6 +24,7 @@ describe "Block class" do
       expect(@block.rooms).must_be_instance_of Array
     end
   end
+
   describe "Error for invalid number of rooms in a block" do
     it "raises an ArgumentError if a block has no rooms" do
       @rooms = []

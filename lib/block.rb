@@ -16,13 +16,13 @@ module Hotel
       @block_reservations = []
     end
 
-    def overlap?(other_date_range)
-      return true if @date_range.overlap?(other_date_range)
-    end
+    # def overlap?(other_date_range)
+    #   return true if @date_range.overlap?(other_date_range)
+    # end
 
-    def add_reservation(reservation)
-      @block_reservations << reservation
-    end
+    # def add_reservation(reservation)
+    #   @block_reservations << reservation
+    # end
 
     def find_available_room
       room = @rooms.find { |a_room| a_room.is_available?(date_range) }

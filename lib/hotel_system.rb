@@ -58,13 +58,14 @@ module Hotel
     def create_a_block(date_range:, rooms:, discounted_price:)
       id = create_id(@blocks)
       block = Hotel::Block.new(id: id, rooms: rooms, date_range: date_range, discounted_price: discounted_price)
-      return @blocks << block
+      @blocks << block
+      return block
     end
 
     def reserve_a_block(block)
       id = create_id(reservations)
       date_range = block.date_range
-      room = room.find_available_room
+      room = block.find_available_room
       price = block.discounted_price
       return Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price, block: block)
     end
