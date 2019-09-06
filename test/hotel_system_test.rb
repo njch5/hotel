@@ -35,9 +35,12 @@ describe "Hotel_System class" do
         @rooms = @hotel_system.list_of_rooms
         @assigned_room = @hotel_system.available_room(@date_range)
       end
-      # it "will reserve a room" do
-      #   expect(@hotel_system.reserve_room(start_date: @start_date, end_date: @end_date)).must_equal true
-      # end
+      it "will reserve a room and its attributes" do
+        @reserved_room = @hotel_system.reserve_room(start_date: @start_date, end_date: @end_date)
+        expect(@reserved_room.id).must_equal 1
+        expect(@reserved_room.date_range.start_date).must_equal Date.parse("2019-07-08")
+        expect(@reserved_room.date_range.end_date).must_equal Date.parse("2019-07-15")
+      end
     end
 
     describe "Open Rooms Method" do
@@ -46,9 +49,16 @@ describe "Hotel_System class" do
         @date_range = Hotel::DateRange.new(start_date: "2019-03-10", end_date: "2019-03-20")
       end
 
-      # it "will pick an open room" do
-      #   expect(@hotel_system.open_rooms(@date_range)).must_equal 1
-      # end
+      it "will pick an available room from open rooms method" do
+        @hotel_system.open_rooms(@date_range)
+        @room = @hotel_system.available_room(@date_range)
+        expect(@room.id).must_equal 1
+      end
+
+      it "returns all the open rooms" do
+        @all_open_rooms = @hotel_system.open_rooms(@date_range)
+        expect(@all_open_rooms.length).must_equal 20
+      end
     end
   end
 
@@ -76,8 +86,19 @@ describe "Hotel_System class" do
     end
 
     it "returns a list of reservations on a specific date" do
+      @hotel_system = Hotel::HotelSystem.new
+      @start_date = "2019-03-08"
+      @end_date = "2019-03-15"
+      @date_range = Hotel::DateRange.new(start_date: @start_date, end_date: @end_date)
+      @rooms = @hotel_system.list_of_rooms
+      @assigned_room = @hotel_system.available_room(@date_range)
+
+      @reservation = @hotel_system.reserve_room(
+        start_date: @start_date,
+        end_date: @end_date,
+      )
       date_range = Hotel::DateRange.new(start_date: "2019-04-04", end_date: "2019-04-08")
-      expect(@hotel_system.reservations_by_date(Date.parse("2019-04-06"))).must_equal @reservation_one
+      expect(@hotel_system.reservations_by_date(Date.parse("2019-03-15"))).must_equal [@reservation]
     end
 
     it "returns an empty array if there are no reservations on a specific date" do

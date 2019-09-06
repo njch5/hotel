@@ -68,10 +68,6 @@ describe "Room class" do
       @room.add_reservation(@reservation_three)
     end
 
-    # it "returns the id of the available room" do
-    #   expect(@room_two.id).must_equal 9
-    # end
-
     it "will return true if a room is available given a date range" do
       @dates_one = Hotel::DateRange.new(start_date: "2019-03-25", end_date: "2019-03-30")
       @dates_two = Hotel::DateRange.new(start_date: "2019-02-03", end_date: "2019-02-10")

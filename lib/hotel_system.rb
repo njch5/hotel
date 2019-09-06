@@ -22,11 +22,11 @@ module Hotel
 
     def reserve_room(start_date:, end_date:, price: 200)
       id = create_id(@reservations)
-      date_range = date_range_wrap(start_date, end_date)
-      # date_range = Hotel::DateRange.new(start_date: start_date, end_date: end_date)
+      # date_range = date_range_constructor(start_date, end_date)
+      date_range = Hotel::DateRange.new(start_date: start_date, end_date: end_date)
       room = available_room(date_range)
-      reservation = reservation_wrap(id, room, date_range, price)
-      # reservation = Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
+      # reservation = reservation_constructor(id, room, date_range, price)
+      reservation = Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
       add_reservation(reservation)
       return reservation
     end
@@ -37,10 +37,6 @@ module Hotel
              end
     end
 
-    def add_reservation(reservation)
-      @reservations << reservation
-    end
-
     def open_rooms(date_range)
       return @rooms.select do |room|
                room.is_available?(date_range)
@@ -49,8 +45,12 @@ module Hotel
 
     def available_room(date_range)
       room = open_rooms(date_range).find { |room| room }
-      raise ArgumentError, "No available rooms!" unless room
+      raise StandardError, "No available rooms!" unless room
       return room
+    end
+
+    def add_reservation(reservation)
+      @reservations << reservation
     end
 
     private
@@ -59,12 +59,13 @@ module Hotel
       return object.count + 1
     end
 
-    def date_range_wrap(start_date, end_date)
-      Hotel::DateRange.new(start_date: start_date, end_date: end_date)
-    end
+    # The constructors don't have to be private methods!
+    # def date_range_constructor(start_date, end_date)
+    #   Hotel::DateRange.new(start_date: start_date, end_date: end_date)
+    # end
 
-    def reservation_wrap(id, room, date_range, price)
-      Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
-    end
+    # def reservation_constructor(id, room, date_range, price)
+    #   Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
+    # end
   end
 end
