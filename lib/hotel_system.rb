@@ -56,6 +56,8 @@ module Hotel
     end
 
     def create_a_block(date_range:, rooms:, discounted_price:)
+      block_available = rooms.all? { |room| room.is_available?(date_range) }
+      raise StandardError, "At least one of the rooms is unavailable on this date!" unless block_available
       id = create_id(@blocks)
       block = Hotel::Block.new(id: id, rooms: rooms, date_range: date_range, discounted_price: discounted_price)
       @blocks << block

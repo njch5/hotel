@@ -132,13 +132,26 @@ describe "Hotel_System class" do
       @date_range = Hotel::DateRange.new(start_date: @start_date, end_date: @end_date)
       @rooms = @hotel_system.rooms[0..3]
       @discounted_price = 160
-      @block = @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
+      # @block = @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
+      @conflicting_reservation = Hotel::Reservation.new(
+        id: 2,
+        date_range: @date_range,
+        room: @hotel_system.rooms[0],
+      )
     end
     it "holds the attributes and its data types" do
+      @date_range = Hotel::DateRange.new(start_date: "2019-08-10", end_date: "2019-08-20")
+      @block = @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
       expect(@block).must_be_instance_of Hotel::Block
       expect(@block.date_range).must_be_instance_of Hotel::DateRange
       expect(@block.rooms).must_be_instance_of Array
       expect(@block.discounted_price).must_be_instance_of Integer
+    end
+
+    it "must raise an error one of the rooms is unavailable" do
+      1.times do
+        @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
+      end.must_raise StandardError
     end
   end
 

@@ -49,4 +49,17 @@ describe "Block class" do
       end.must_raise ArgumentError
     end
   end
+  describe "Connect rooms method" do
+    it "will connect the rooms to the block" do
+      @room1 = Hotel::Room.new(id: 1)
+      @room2 = Hotel::Room.new(id: 2)
+      @date_range = Hotel::DateRange.new(start_date: "2019-11-18", end_date: "2019-11-20")
+      @rooms = [@room1, @room2]
+      @block = Hotel::Block.new(id: 1, date_range: @date_range, discounted_price: 150, rooms: @rooms)
+
+      r1block = @room1.blocks
+      r2block = @room2.blocks
+      expect(r1block.include?(@block)).must_equal true
+    end
+  end
 end
