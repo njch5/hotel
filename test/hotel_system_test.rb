@@ -178,9 +178,30 @@ describe "Hotel_System class" do
         expect(list_of_rooms.include?(@block.rooms)).must_equal false
       end
     end
+  end
 
-    # it "will exclude rooms that have already been booked" do
+  describe "Reserve room from block method" do
+    before do
+      @hotel_system = Hotel::HotelSystem.new
+      @start_date = "2019-07-03"
+      @end_date = "2019-07-08"
+      @date_range = Hotel::DateRange.new(start_date: @start_date, end_date: @end_date)
+      @rooms = @hotel_system.rooms[0..4]
+      @discounted_price = 180
+      @block = @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
+      @blocked_reservation = @hotel_system.reserve_a_block(@block)
+    end
 
-    # end
+    it "will reserve a room from a block" do
+      expect(@block.reserve_a_room).must_equal true
+    end
+
+    it "will not reserve a room that is not in a block" do
+      expect do
+        6.times do
+          @block.reserve_a_room
+        end.must_raise ArgumentError
+      end
+    end
   end
 end

@@ -72,6 +72,10 @@ module Hotel
       return Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price, block: block)
     end
 
+    def reserve_room_from_block
+      @block.reserve_a_room
+    end
+
     private
 
     def create_id(object)
