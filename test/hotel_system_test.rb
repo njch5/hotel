@@ -197,11 +197,15 @@ describe "Hotel_System class" do
     end
 
     it "will not reserve a room that is not in a block" do
+      # puts @hotel_system.reserve_a_room_from_block(@block)
+      # expect do
+      #   6.times do
+      #     @hotel_system.reserve_a_room_from_block(@block)
+      #   end.must_raise ArgumentError
+      # end
       expect do
-        6.times do
-          @block.reserve_a_room
-        end.must_raise ArgumentError
-      end
+        @hotel_system.reserve_a_room_from_block(@block.rooms[6])
+      end.must_raise StandardError
     end
   end
 end

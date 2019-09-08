@@ -1,0 +1,7 @@
+-Create a method that will calculate price of a room in a block with discounted rate
+-Refactor names of tests to make it more explicitly clear on what it's testing
+-Make add_reservation method in HotelSystem class a private method so users can't make their own reservations
+-Rename some variables that are vague (i.e. "duration" to "total_nights_of_stay" in DateRange class)
+-Modify "reserve_a_room_from_block" helper method in HotelSystem for reserving a room in a block
+-Modify "reserve_a_room" method in Block class. This may not be doing what I think it's doing..
+-Reorganize tests for each class. I feel like most of my class' methods were being mostly tested in the HotelSystem class test file

@@ -16,21 +16,13 @@ module Hotel
       @reserve_room_hash = {}
     end
 
-    # def overlap?(other_date_range)
-    #   return true if @date_range.overlap?(other_date_range)
-    # end
-
-    # def add_reservation(reservation)
-    #   @block_reservations << reservation
-    # end
-
     def find_available_room
+      # find_available_room will raise an error if there are no available rooms
       # checks through each room to see if room is available in reserve_room_hash
       rooms.each do |a_room|
         if @reserve_room_hash[a_room] == nil
           raise ArgumentError, "No available rooms! All are booked" unless a_room
           return a_room
-        else
         end
       end
       # room = @rooms.find { |a_room| a_room.is_available?(date_range) }
@@ -38,7 +30,6 @@ module Hotel
     end
 
     def reserve_a_room
-      # find_available_room will raise an error if there are no available rooms
       # key for reserve_room_hash are the rooms and the values are whether the rooms are available or not
       bookable_room = find_available_room
       return @reserve_room_hash[bookable_room] = true

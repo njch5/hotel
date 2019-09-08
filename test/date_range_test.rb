@@ -62,6 +62,13 @@ describe "DateRange Class" do
       expect(@date_range_one.overlap?(@date_range_two)).must_equal true
     end
 
+    it "will return true if two date ranges overlap" do
+      @date_range_one = Hotel::DateRange.new(start_date: "2019-02-20", end_date: "2019-02-28")
+      @date_range_two = Hotel::DateRange.new(start_date: "2019-02-05", end_date: "2019-02-22")
+
+      expect(@date_range_one.overlap?(@date_range_two)).must_equal true
+    end
+
     it "will return false if two date ranges don't overlap" do
       @date_range_one = Hotel::DateRange.new(start_date: "2019-05-10", end_date: "2019-05-30")
       @date_range_two = Hotel::DateRange.new(start_date: "2019-06-05", end_date: "2019-06-16")
@@ -72,6 +79,13 @@ describe "DateRange Class" do
     it "will return false if one date range's start date is on the same day as the other date range's end date" do
       @date_range_one = Hotel::DateRange.new(start_date: "2019-10-05", end_date: "2019-10-30")
       @date_range_two = Hotel::DateRange.new(start_date: "2019-10-30", end_date: "2019-11-05")
+
+      expect(@date_range_one.overlap?(@date_range_two)).must_equal false
+    end
+
+    it "will return false if one date range's end date is on the same day as the other date range's start date" do
+      @date_range_one = Hotel::DateRange.new(start_date: "2019-08-30", end_date: "2019-09-03")
+      @date_range_two = Hotel::DateRange.new(start_date: "2019-08-05", end_date: "2019-08-30")
 
       expect(@date_range_one.overlap?(@date_range_two)).must_equal false
     end

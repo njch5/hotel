@@ -24,10 +24,8 @@ module Hotel
 
     def reserve_room(start_date:, end_date:, price: 200)
       id = create_id(@reservations)
-      # date_range = date_range_constructor(start_date, end_date)
       date_range = Hotel::DateRange.new(start_date: start_date, end_date: end_date)
       room = available_room(date_range)
-      # reservation = reservation_constructor(id, room, date_range, price)
       reservation = Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price)
       add_reservation(reservation)
       return reservation
@@ -72,8 +70,8 @@ module Hotel
       return Hotel::Reservation.new(id: id, room: room, date_range: date_range, price: price, block: block)
     end
 
-    def reserve_room_from_block
-      @block.reserve_a_room
+    def reserve_a_room_from_block(block)
+      raise StandardError, "Room not available in block!" unless reserve_room = block.reserve_a_room
     end
 
     private
