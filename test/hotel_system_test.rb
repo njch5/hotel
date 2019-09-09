@@ -148,7 +148,7 @@ describe "Hotel_System class" do
       expect(@block.discounted_price).must_be_instance_of Integer
     end
 
-    it "must raise an error one of the rooms is unavailable" do
+    it "must raise an error when one of the rooms is unavailable" do
       1.times do
         @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
       end.must_raise StandardError
