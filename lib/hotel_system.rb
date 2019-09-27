@@ -49,8 +49,8 @@ module Hotel
       return room
     end
 
-    def add_reservation(reservation)
-      @reservations << reservation
+    def add_a_reservation(reservation)
+      add_reservation(reservation)
     end
 
     def create_a_block(date_range:, rooms:, discounted_price:)
@@ -78,6 +78,10 @@ module Hotel
 
     def create_id(object)
       return object.count + 1
+    end
+
+    def add_reservation(reservation)
+      @reservations << reservation
     end
   end
 end

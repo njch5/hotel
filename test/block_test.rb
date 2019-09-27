@@ -33,7 +33,7 @@ describe "Block class" do
 
       expect do
         @block = Hotel::Block.new(id: 2, date_range: @date_range, discounted_price: 100, rooms: @rooms)
-      end.must_raise ArgumentError
+      end.must_raise StandardError
     end
 
     it "raises an ArgumentError if a block has more than 5 rooms" do
@@ -46,7 +46,7 @@ describe "Block class" do
 
       expect do
         @block = Hotel::Block.new(id: 3, date_range: @date_range, discounted_price: 135, rooms: @rooms)
-      end.must_raise ArgumentError
+      end.must_raise StandardError
     end
   end
 end

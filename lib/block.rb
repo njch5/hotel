@@ -8,7 +8,7 @@ module Hotel
     def initialize(id:, rooms:, date_range:, discounted_price:)
       @id = id
       if rooms.count < 1 || rooms.count > 5
-        raise ArgumentError, "A block has to have between 1 to 5 rooms!"
+        raise StandardError, "A block has to have between 1 to 5 rooms!"
       end
       @rooms = rooms
       @date_range = date_range

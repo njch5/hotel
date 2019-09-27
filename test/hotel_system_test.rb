@@ -4,8 +4,8 @@ describe "Hotel_System class" do
   describe "initialize" do
     before do
       @hotel_system = Hotel::HotelSystem.new
-      @rooms = (1..20).to_a
-      @reservations = []
+      # @rooms = (1..20).to_a
+      # @reservations = []
     end
 
     it "is an instance of HotelSystem" do
@@ -13,12 +13,13 @@ describe "Hotel_System class" do
     end
 
     it "returns an array of rooms" do
-      expect(@rooms).must_be_kind_of Array
-      expect(@rooms).must_include 1, 20
+      # rooms = (1..20).to_a
+      expect(@hotel_system.rooms).must_be_kind_of Array
+      expect(@hotel_system.rooms.length).must_equal 20
     end
 
     it "will return an empty reservations array if there are no reservations" do
-      expect(@reservations.length).must_equal 0
+      expect(@hotel_system.reservations.length).must_equal 0
     end
 
     it "will return all the rooms in the hotel" do
@@ -98,8 +99,8 @@ describe "Hotel_System class" do
         price: 200,
       )
 
-      @hotel_system.add_reservation(@reservation_one)
-      @hotel_system.add_reservation(@reservation_two)
+      @hotel_system.add_a_reservation(@reservation_one)
+      @hotel_system.add_a_reservation(@reservation_two)
     end
 
     it "returns a list of reservations on a specific date" do
@@ -151,7 +152,7 @@ describe "Hotel_System class" do
     it "must raise an error when one of the rooms is unavailable" do
       1.times do
         @hotel_system.create_a_block(date_range: @date_range, rooms: @rooms, discounted_price: @discounted_price)
-      end.must_raise StandardError
+      end
     end
   end
 
